@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 
 const gallerySection = document.querySelector(".gallery");
-
 gallerySection.addEventListener('click', onClick);
 
 let currentBasicLightbox = null;
@@ -30,8 +28,12 @@ function onClick(event) {
     }
     event.preventDefault();
     currentBasicLightbox = basicLightbox.create(`
-		<img width="1400" height="900" src="${event.target.dataset.source}">
-	`)
+        <img width="1400" height="900" src="${event.target.dataset.source}">
+    `, {
+        onClose: (instance) => {
+            document.removeEventListener('keydown', onEscPressed);
+        }
+    });
     currentBasicLightbox.show();
     document.addEventListener('keydown', onEscPressed);
 }
@@ -39,6 +41,5 @@ function onClick(event) {
 function onEscPressed(event) {
     if (event.code === "Escape") {
         currentBasicLightbox.close();
-        document.removeEventListener("keydown", onEscPressed);
     }
 }
