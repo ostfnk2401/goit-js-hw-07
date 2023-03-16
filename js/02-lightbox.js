@@ -22,11 +22,3 @@ const galleryLightBox = new SimpleLightbox('.gallery a', {
     captionsData: "alt",
     captionDelay: 250,
 });
-
-galleryLightBox.on('show.simplelightbox', function (event) {
-    if (event.target.nodeName !== 'IMG') {
-        return;
-    }
-    event.preventDefault();
-});
-
